@@ -1,0 +1,362 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.photo {
+    text-align: center;
+    margin-top: 30px;  /* Add margin-top for spacing */
+}
+
+#expense-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#expense-form input, #expense-form select, #expense-form button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#expense-form button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+#expense-form button:hover {
+    background-color: #45a049;
+}
+
+/* Button Styles */
+button {
+    background-color: #FF5722;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+button:hover {
+    background-color: #E64A19;
+}
+
+/* Filter Styles */
+.filter {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.filter select {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Footer Styles (Logout Button) */
+#logout-btn {
+    background-color: #FF5722;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    display: block;
+    margin: 20px auto;
+}
+
+#logout-btn:hover {
+    background-color: #E64A19;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Aligning the Total Amount and Chart */
+.total-amount {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.chart-container {
+    width: 48%;
+    text-align: center;
+    margin-top: 30px; /* Ensure space between sections */
+}
+
+#expense-chart {
+    width: 100%;
+    height: 300px;  /* Adjust height as needed */
+    margin-top: 20px;
+}
+
+/* Chart Styles */
+.chart-container {
+    max-width: 600px; /* Adjust this value as needed */
+    margin: 20px auto;
+    text-align: center;
+}
+
+#expense-chart {
+    width: 100% !important;
+    height: 400px;  /* You can adjust this to a smaller value if needed */
+    margin-top: 20px;
+} 
+
+canvas {
+    width: 100% !important;
+    height: 300px !important;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.auth-container{
+    max-width: 600px; /* Adjust this value as needed */
+    margin: 20px auto;
+    text-align: center;
+}
+p{
+    font-style: italic;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0b1f75;
+    padding: 15px 20px;
+    height: 0%;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2.3em;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+}
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom right, #d4cbee, #a473d1);
+    color: #333;
+    padding: 0 20px;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0b1f75;
+    padding: 15px 20px;
+    height: 0%;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2.3em;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+}
+
+.navbar .logo {
+    font-size: 3.5rem;
+    font-weight: bold;
+    font-stretch: extra-condensed;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.nav-links a {
+    text-decoration: none;
+    margin: 0 10px;
+    color: white;
+    font-weight: 500;
+}
+
+/* Authentication Container */
+.auth-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.auth-container h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.auth-container label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.auth-container input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.auth-container .btn {
+    background-color: #1f1c1c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-container .btn:hover {
+    background-color: #eecdcd;
+}
+
+/* Error Message */
+#error-message {
+    margin-top: 10px;
+    color: rgb(14, 5, 5);
+    font-size: 0.9rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #080707;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom, #dff9fb, #c7ecee);
+    color: #333;
+    padding: 0 20px;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0a61a3;
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: rgb(243, 239, 239);
+    margin: 20px 0;
+}
+
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links a {
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 8px 15px;
+    background-color: #74b9ff;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.nav-links a:hover {
+    background-color: #020c14;
+}
+
+/* Main Content */
+main {
+    text-align: center;
+    margin-top: 60px;
+}
+
+main h2 {
+    font-size: 2rem;
+    color: #2d3436;
+    margin-bottom: 10px;
+}
+
+main p {
+    font-size: 1rem;
+    color: #636e72;
+    margin: 10px 0;
+}
+
+.main-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #0984e3;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}

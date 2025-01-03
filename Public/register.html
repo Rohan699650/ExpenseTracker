@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Budget Expense Tracker</title>
+    <link rel="icon" type="image/svg+xml" href="react.png">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="RegBug.png" alt="Budget Tracker Logo">
+        </div>
+        <div class="logo">Budget Expense Tracker</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+        </div>
+    </header>
+
+        
+    <!-- Intro Text Section Above Main Content -->
+    <section class="intro-text">
+        <p><strong>Welcome to Budget Expender!</strong></p>
+        <p>Join now to take control of your finances. Our platform helps you easily track your expenses and set financial goals, making budgeting simple and effective.</p>
+    </section>
+
+    <main>
+        <section class="auth-container">
+            <main>
+            <h2>Register</h2>
+            <form id="registerForm" action="/register" method="POST" onsubmit="return handleRegister(event)">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" aria-label="Full Name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="registerEmail" name="email" aria-label="Email Address" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="registerPassword" name="password" aria-label="Password" required>
+
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" aria-label="Confirm Password" required>
+
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the terms and conditions</label>
+
+                <div id="passwordStrength"></div>
+                <button type="submit" class="btn" id="registerBtn" disabled>Register</button>
+                
+
+            </form>
+
+            <div id="error-message"></div>
+
+            <p>Already have an account? <a href="login-register.html">Login here</a></p>
+        </section>
+
+        
+        <div class="progress-indicator">
+            <div class="step completed">
+                <span class="step-number">1</span>
+                <span class="step-label">Register</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <span class="step-label">Login</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <span class="step-label">Dashboard</span>
+            </div>
+        </div>
+        <div class="decorative-elements">
+            <i class="icon-arrow-down"></i>
+            <div class="line"></div>
+        </div>
+        
+        <section class="intro-text">
+            <h3>Why Register?</h3>
+            <ul>
+                <li>Access a personalized dashboard to track your spending and stay on budget.</li>
+                <li>Securely store all your financial data and access it whenever you need it.</li>
+                <li>Enjoy easy and intuitive expense tracking with insights into your spending habits.</li>
+            </ul>
+
+            <div class="image-container">
+                <img src="Registrationpage_1.jpg" alt="Register for Budget Tracker" class="main-image">
+                <img src="Registrationpage_2.png" alt="Tracking expenses" class="main-image">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Budget Expense Tracker. All Rights Reserved.| <a href="terms-of-service.html">Terms of Service</a> | <a href="privacy-policy.html">Privacy Policy</a></p>
+        <footer class="social-footer">
+            <p>Connect with us:</p>
+            
+            <div class="social-icons">
+                <a href="https://facebook.com"><img src="Faceee.webp" alt="Facebook"></a>
+                <a href="https://twitter.com"><img src="Twittter.png" alt="Twitter"></a>
+                <a href="https://www.instagram.com"><img src="Insta.webp" alt="Instagram"></a>
+            </div>
+        </footer>
+    </footer>
+
+    <script>
+const registerEmail = document.getElementById('registerEmail');
+const registerPassword = document.getElementById('registerPassword');
+const confirmPassword = document.getElementById('confirmPassword');
+const registerBtn = document.getElementById('registerBtn');
+const errorMessage = document.getElementById('error-message');
+const registerName = document.getElementById('name'); // Add reference to the name field
+
+registerEmail.addEventListener('input', validateEmail);
+registerPassword.addEventListener('input', validatePassword);
+confirmPassword.addEventListener('input', validateConfirmPassword);
+registerName.addEventListener('input', validateName);
+
+function validateEmail() {
+    const email = registerEmail.value;
+
+    // Email validation for @gmail.com and format validation
+    if (email && !email.endsWith('@gmail.com')) {
+        errorMessage.innerHTML = "Email must be a @gmail.com address.";
+        errorMessage.style.color = "red";
+        registerBtn.disabled = true;
+        return;
+    } else if (email && !validateEmailFormat(email)) {
+        errorMessage.innerHTML = "Please enter a valid email address.";
+        errorMessage.style.color = "red";
+        registerBtn.disabled = true;
+        return;
+    } else {
+        errorMessage.innerHTML = "";
+    }
+    
+    validateForm(); // Validate other fields if email is valid
+}
+
+function validateName() {
+    const name = registerName.value;
+
+    // Name validation for capitalized first letter
+    if (name && name.charAt(0) !== name.charAt(0).toUpperCase()) {
+        errorMessage.innerHTML = "Name must start with a capital letter.";
+        errorMessage.style.color = "red";
+        registerBtn.disabled = true;
+        return;
+    } else {
+        errorMessage.innerHTML = "";
+    }
+
+    validateForm(); // Validate other fields if name is valid
+}
+
+function validatePassword() {
+    const password = registerPassword.value;
+
+    // Password strength validation
+    if (!checkPasswordStrength(password)) {
+        errorMessage.innerHTML = "Password must be at least 8 characters long, with a mix of upper and lower case letters, numbers, and special characters.";
+        errorMessage.style.color = "red";
+        registerBtn.disabled = true;
+        return;
+    }
+
+    // No spaces in password validation
+    if (password.includes(" ")) {
+        errorMessage.innerHTML = "Password cannot contain spaces.";
+        errorMessage.style.color = "red";
+        registerBtn.disabled = true;
+        return;
+    }
+
+    validateForm(); // Validate other fields if password is valid
+}
+
+function validateConfirmPassword() {
+    const confirmPwd = confirmPassword.value;
+    const password = registerPassword.value;
+
+    // Confirm password length validation
+    if (confirmPwd === "") {
+        errorMessage.innerHTML = "Please confirm your password.";
+        errorMessage.style.color = "red";
+        registerBtn.disabled = true;
+        return;
+    }
+
+    // Password matching validation
+    if (password !== confirmPwd) {
+        errorMessage.innerHTML = "Passwords do not match.";
+        errorMessage.style.color = "red";
+        registerBtn.disabled = true;
+        return;
+    } else {
+        errorMessage.innerHTML = ""; // Clear error message when passwords match
+    }
+
+    validateForm(); // Validate other fields if passwords match
+}
+
+// Final form validation (called after each individual validation)
+function validateForm() {
+    const email = registerEmail.value;
+    const password = registerPassword.value;
+    const confirmPwd = confirmPassword.value;
+    const name = registerName.value;
+
+    // Enable the submit button only if all fields are valid
+    if (email && password && confirmPwd && name.charAt(0) === name.charAt(0).toUpperCase() && checkPasswordStrength(password) && password === confirmPwd) {
+        registerBtn.disabled = false;
+    } else {
+        registerBtn.disabled = true;
+    }
+}
+
+// Email format validation function
+function validateEmailFormat(email) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+}
+
+// Password strength check function
+function checkPasswordStrength(password) {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumbers = /\d/.test(password);
+    const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChars;
+}
+
+async function handleRegister(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = registerEmail.value;
+    const password = registerPassword.value;
+
+    try {
+        const response = await fetch('/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, email, password }),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert(result.message);
+            window.location.href = "login-register.html";
+        } else {
+            errorMessage.innerHTML = result.error;
+            errorMessage.style.color = "red";
+        }
+    } catch (error) {
+        errorMessage.innerHTML = 'Error registering. Please try again.';
+        errorMessage.style.color = "red";
+    }
+}
+
+    </script>
+</body>
+</html>

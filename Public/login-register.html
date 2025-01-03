@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Budget Expense Tracker</title>
+    <link rel="icon" type="image/svg+xml" href="react.png">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="budget_1.png" alt="Budget Tracker Logo">
+        </div>
+        
+        <div class="logo">Budget Expense Tracker</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+        </div>
+    </header>
+
+    <section class="intro-text">
+        <p><strong>Welcome to Budget Expender!</strong></p>
+        <p>Effortlessly Manage Your Finances, Anytime, Anywhere. Sign in to your account or create a new one to start tracking your expenses and managing your budget. Securely store all your data and access it whenever you need.</p>
+    </section>
+
+
+    
+    <main>
+        <section class="auth-container">
+            <h2>Login</h2>
+            <form id="loginForm" action="/login" method="POST" onsubmit="return handleLogin(event)">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" aria-label="Email Address" required>
+            
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" aria-label="Password" required>
+            
+                <button type="submit" class="btn" id="loginBtn" disabled>Login</button>
+                
+                
+            </form>
+
+            <div id="error-message"></div>
+
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
+            
+        </section>
+
+
+        <div class="progress-indicator">
+            <div class="step completed">
+                <span class="step-number">1</span>
+                <span class="step-label">Register</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <span class="step-label">Login</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <span class="step-label">Dashboard</span>
+            </div>
+        </div>
+        
+        <div class="decorative-elements">
+            <i class="icon-arrow-down"></i>
+            <div class="line"></div>
+        </div>
+        
+        <section class="intro-text">
+          
+            <h3>For Existing Users</h3>
+            <p>Log in to Your Account:</p>
+            <ul>
+                <li>Enter your registered email address and password.</li>
+                <li>Continue where you left off with all your expenses saved and secure.</li>
+            </ul>
+
+            <h3>New to Budget Expender?</h3>
+            <p>Create an Account:</p>
+            <ul>
+                <li>Once registered, you'll have access to a personalized expense tracker designed for your unique financial needs.</li>
+            </ul>
+
+            <h3>Why Log In?</h3>
+            <ul>
+                <li>Personalized Dashboard: View and manage your expense data securely.</li>
+                <li>Data Privacy Guaranteed: Your information is encrypted and stored securely.</li>
+                <li>Save Your Progress: All your expense records, analytics, and trends are saved and accessible anytime.</li>
+            </ul>
+
+            <div class="cards">
+                <div class="card">
+                    <h4>Tip of the Day</h4>
+                    <p>Start categorizing your expenses to identify saving opportunities.</p>
+                </div>
+                <div class="card">
+                    <h4>Get Started</h4>
+                    <p>Try our budget analytics dashboard for detailed insights.</p>
+                </div>
+            </div>
+            
+
+            <div class="image-container">
+                <img src="Loginpage_2.jpg" alt="Budget management tools" class="main-image">
+                <img src="Loginpage_5.png" alt="Budget management tools" class="main-image">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Budget Expense Tracker | <a href="terms-of-service.html">Terms of Service</a> | <a href="privacy-policy.html">Privacy Policy</a></p>
+            <footer class="social-footer">
+                <p>Connect with us:</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com"><img src="Faceee.webp" alt="Facebook"></a>
+                    <a href="https://twitter.com"><img src="Twittter.png" alt="Twitter"></a>
+                    <a href="https://in.linkedin.com/"><img src="LinkedIn.png" alt="LinkedIn"></a>
+                </div>
+            </footer>
+    </footer>
+    
+
+    <script>
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('loginBtn');
+        const errorMessage = document.getElementById('error-message');
+
+        emailInput.addEventListener('input', validateForm);
+        passwordInput.addEventListener('input', validateForm);
+
+        function validateForm() {
+            if (emailInput.value !== "" && passwordInput.value !== "") {
+                loginBtn.disabled = false;
+            } else {
+                loginBtn.disabled = true;
+            }
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+
+            const email = emailInput.value;
+            const password = passwordInput.value;
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Store the user's name in localStorage
+                    localStorage.setItem('userName', data.user.name);
+                    localStorage.setItem('userId', data.user.id);  
+
+                    // Show the success message and redirect
+                    alert(data.message); // Display success message
+                    window.location.href = "expense-tracker.html"; // Redirect to expense tracker page
+                } else {
+                    // Display error message
+                    errorMessage.textContent = data.error;
+                    errorMessage.style.color = 'red';
+                }
+            } catch (error) {
+                console.error('Error logging in:', error);
+                errorMessage.textContent = 'Something went wrong. Please try again later.';
+                errorMessage.style.color = 'red';
+            }
+        }
+
+        // Check if the user is already logged in by fetching the name from localStorage
+        window.addEventListener('load', function () {
+            const userName = localStorage.getItem('userName');
+
+            if (userName) {
+                // Update the welcome message on the page if a username is stored
+                const welcomeMessage = document.getElementById('welcome-message');
+                welcomeMessage.innerText = `Welcome back, ${userName}!`;
+
+            }
+        });
+    </script>
+</body>
+</html>
