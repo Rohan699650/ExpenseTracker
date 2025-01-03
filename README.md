@@ -109,25 +109,7 @@ The application will run at:
 
 Frontend: http://localhost:3000
 Backend: http://localhost:5000
-Folder Structure
-plaintext
-Copy code
-Expense-Tracker-MERN/
-├── backend/
-│   ├── models/           # Mongoose models for users and expenses
-│   ├── routes/           # API routes for handling requests
-│   ├── server.js         # Main server file
-│   └── .env              # Environment variables
-├── frontend/
-│   ├── public/           # Static assets
-│   ├── src/              # React components, pages, and logic
-│   │   ├── components/   # Reusable components (e.g., forms, charts)
-│   │   ├── pages/        # Main pages (e.g., Login, Dashboard)
-│   │   ├── App.js        # Main React app file
-│   │   ├── index.js      # Entry point for React
-│   │   └── styles.css    # Custom CSS styles
-├── README.md             # Project documentation
-└── package.json          # Project dependencies
+
 Future Enhancements
 📈 Analytics Dashboard: Add monthly and yearly expense trends.
 🔄 Recurring Expenses: Allow users to set up recurring expenses.
