@@ -55,6 +55,8 @@ An interactive pie chart provides real-time insights into spending habits.
 Users can download expense data as a CSV file for offline use.
 6. Logout
 Secure logout functionality clears session tokens and redirects to the login page.
+
+
 Installation
 Step 1: Clone the Repository
 bash
